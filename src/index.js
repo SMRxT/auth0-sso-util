@@ -74,7 +74,7 @@ export function verifyAuth({
   defaultHref = '/',
   callbackURL = window.location.pathname,
   scope = 'openid name email app_metadata user_metadata roles',
-  resetLink,
+  lockOptions = {},
 }) {
   // hide the page in case there is an SSO session (to avoid flickering)
   hideBody();
@@ -90,7 +90,7 @@ export function verifyAuth({
     localStorage.setItem(tokenStorageKey, `"${hash.id_token}"`);
     window.location.href = hash.state || defaultHref;
     showBody();
-    return;
+    return Promise.resolve();
   }
 
   const idToken = localStorage.getItem(tokenStorageKey);
@@ -105,43 +105,47 @@ export function verifyAuth({
 
   if (idToken && tokenIsValid) {
     showBody();
-    return;
+    return Promise.resolve();
   }
 
   // user is not logged, check whether there is an SSO session or not
-  lock.$auth0.getSSOData((err, data) => {
-    if (!err && data.sso) {
-      // There is an SSO session.
-      // No need to prompt for log in, just redirect for sign in.
-      lock.$auth0.signin({
-        state: window.location.href, // come back to the current location.
-        callbackURL,
-        callbackOnLocationHash: true,
-        scope,
-      });
-    } else {
-      if (window.location.pathname !== '/') {
-        window.location.href = '/?targetUrl=' + window.location.href;
-        return;
-      }
+  return new Promise((resolve) => {
+    lock.$auth0.getSSOData((err, data) => {
+      if (!err && data.sso) {
+        // There is an SSO session.
+        // No need to prompt for log in, just redirect for sign in.
+        lock.$auth0.signin({
+          state: window.location.href, // come back to the current location.
+          callbackURL,
+          callbackOnLocationHash: true,
+          scope,
+        });
+      } else {
+        if (window.location.pathname !== '/') {
+          window.location.href = '/?targetUrl=' + window.location.href;
+          return resolve();
+        }
 
-      showBody();
-      setTimeout(() => {
-        lock.show({
+        showBody();
+
+        const defaultLockOptions = {
           sso: true,
           closable: false,
           disableSignupAction: true,
-          resetLink,
           // primaryColor: '#0099FF',
           authParams: {
             state: getQueryParameter('targetUrl'),
-            scope: 'openid name email app_metadata user_metadata roles',
+            scope,
           },
-          callbackURL: 'http://localhost:8070/',
+          callbackURL,
           responseType: 'token',
-        });
-      }, 10);
-    }
+        };
+
+        setTimeout(() => { // Fix lock sometimes not showing.
+          lock.show({ ...defaultLockOptions, ...lockOptions }); // eslint-disable-line computed-property-spacing, max-len
+        }, 10);
+      }
+    });
   });
 }
 
