@@ -29,7 +29,7 @@ module.exports = {
     }]
   },
   output: {
-    library: 'smrxt-auth-plugin',
+    library: 'auth0-sso-util',
     libraryTarget: 'umd'
   },
   plugins: plugins,

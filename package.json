@@ -1,13 +1,13 @@
 {
-  "name": "smrxt-auth-plugin",
-  "version": "1.0.0",
-  "description": "smrxt-auth-plugin-description",
+  "name": "auth0-sso-util",
+  "version": "0.1.0",
+  "description": "Standardize a method for implementing SSO for Auth0. Implemented in vanilla JS, this library can be included in any SPA to require authentication without the need to create an implementation specific to each framework.",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib dist",
     "build": "babel src --out-dir lib",
-    "build:umd": "webpack src/index.js dist/smrxt-auth-plugin.js && NODE_ENV=production webpack src/index.js dist/smrxt-auth-plugin.min.js",
-    "lint": "eslint src test examples",
+    "build:umd": "webpack src/index.js dist/auth0-sso-util.js && NODE_ENV=production webpack src/index.js dist/auth0-sso-util.min.js",
+    "lint": "eslint src test",
     "test": "NODE_ENV=test mocha",
     "test:watch": "NODE_ENV=test mocha --watch",
     "test:cov": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha",
@@ -15,17 +15,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/smrxt-auth-plugin-author/smrxt-auth-plugin.git"
+    "url": "https://github.com/SMRxT/auth0-sso-util.git"
   },
   "keywords": [
-    "smrxt-auth-plugin-keywords"
+    "auth0-sso-util-keywords"
   ],
-  "author": "smrxt-auth-plugin-author",
+  "author": "Scott Smerchek <scott.smerchek@smrxt.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/smrxt-auth-plugin-author/smrxt-auth-plugin/issues"
+    "url": "https://github.com/SMRxT/auth0-sso-util/issues"
   },
-  "homepage": "https://github.com/smrxt-auth-plugin-author/smrxt-auth-plugin",
+  "homepage": "https://github.com/SMRxT/auth0-sso-util",
   "devDependencies": {
     "babel": "^6.3.13",
     "babel-cli": "^6.3.17",

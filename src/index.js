@@ -132,7 +132,6 @@ export function verifyAuth({
           sso: true,
           closable: false,
           disableSignupAction: true,
-          // primaryColor: '#0099FF',
           authParams: {
             state: getQueryParameter('targetUrl'),
             scope,
