@@ -1,0 +1,26 @@
+{
+  "name": "auth0-sso-util",
+  "version": "0.2.0",
+  "homepage": "https://github.com/SMRxT/auth0-sso-util",
+  "authors": [
+    "Scott Smerchek <scott.smerchek@gmail.com>"
+  ],
+  "description": "Standardize a method for implementing SSO for Auth0. Implemented in vanilla JS, this library can be included in any SPA to require authentication without the need to create an implementation specific to each framework.",
+  "main": "dist/auth0-sso-util.js",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals"
+  ],
+  "keywords": [
+    "auth0"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

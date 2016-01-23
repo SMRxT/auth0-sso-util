@@ -30,7 +30,8 @@ module.exports = {
   },
   output: {
     library: 'auth0-sso-util',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   plugins: plugins,
   resolve: {

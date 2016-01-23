@@ -1,6 +1,6 @@
 {
   "name": "auth0-sso-util",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Standardize a method for implementing SSO for Auth0. Implemented in vanilla JS, this library can be included in any SPA to require authentication without the need to create an implementation specific to each framework.",
   "main": "lib/index.js",
   "scripts": {
